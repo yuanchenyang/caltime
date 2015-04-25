@@ -1,7 +1,13 @@
-source 'https://rubygems.org'
+# A sample Gemfile
+source "https://rubygems.org"
+gemspec
 
-gem 'highline'
 gem 'mechanize'
 gem 'nokogiri'
-gem 'terminal-table'
 gem 'colorize'
+gem 'terminal-table'
+gem 'highline'
+
+group :development do
+  gem 'debugger'
+end
