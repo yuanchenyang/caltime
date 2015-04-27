@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+require 'caltime'
+require 'highline/import'
+
+c = Caltime.new
+c.authenticate
+
+timecard = c.timecard
+punched_in = c.punched_in?
+
+puts "Curent Timecard:"
+puts timecard
+puts ""
+confirm = ask("You are currently punched #{punched_in ? "in" : "out"}. Would you like to punch #{punched_in ? "out" : "in"}? [y/n]: ") { |yn|
+  yn.validate = /[yn]/i
+}
+exit unless confirm.downcase == 'y'
+
+c.punch
+puts "Punch successfully recorded"
+
+
