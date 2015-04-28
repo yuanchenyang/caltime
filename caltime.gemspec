@@ -8,11 +8,11 @@ Gem::Specification.new do |s|
   s.email       = 'nicholas.herson@gmail.com'
   s.files       = ["lib/caltime.rb"]
   s.license       = 'MIT'
-  s.add_runtime_dependency 'mechanize'
-  s.add_runtime_dependency 'highline'
-  s.add_runtime_dependency 'colorize'
-  s.add_runtime_dependency 'nokogiri'
-  s.add_runtime_dependency 'terminal-table'
-  s.add_development_dependency 'debugger'
+  s.add_runtime_dependency 'mechanize', '~> 2.7'
+  s.add_runtime_dependency 'highline', '~> 1.6'
+  s.add_runtime_dependency 'colorize', '~> 0.7'
+  s.add_runtime_dependency 'nokogiri', '~> 1.6'
+  s.add_runtime_dependency 'terminal-table', '~> 1.4'
+  s.add_development_dependency 'debugger', '~> 1.6'
   s.executables << 'caltime'
 end
