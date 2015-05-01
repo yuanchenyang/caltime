@@ -75,7 +75,7 @@ class Caltime
   end
 
   def punched_in?
-    today = Time.now.strftime("%a %-m/%-d")
+    today = Time.now.strftime("%a %-m/%d")
     latest_today_row = fetch_timecard_rows.select { |row| row.text =~ /#{today}/ }[-1]
     punched_in = latest_today_row.css('td[class="InPunch"]').text =~ /[0-9]:[0-9][0-9]/
     punched_out = latest_today_row.css('td[class="OutPunch"]').text =~ /[0-9]:[0-9][0-9]/
