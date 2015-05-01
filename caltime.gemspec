@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'caltime'
-  s.version     = '0.0.1'
+  s.version     = '0.0.2'
   s.date        = '2015-04-24'
   s.summary     = "CalTime CLI tool"
   s.description = "Uses web scraping to punch in, punch out, report status, and display a time card in a shell"
