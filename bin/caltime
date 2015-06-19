@@ -1,22 +1,36 @@
 #!/usr/bin/env ruby
+#require 'caltime'
 require 'caltime'
 require 'highline/import'
+require 'optparse'
 
-c = Caltime.new
+
+options = {}
+OptionParser.new do |opt|
+  opt.on('--credentials FILENAME') { |o| options[:credentials] = o }
+  opt.on('--punch') { |o| options[:punch] = true }
+  opt.on('--quiet') { |o| options[:print] = true }
+end.parse!
+
+c = Caltime.new(options[:credentials])
 c.authenticate
-
 timecard = c.timecard
 punched_in = c.punched_in?
 
-puts "Curent Timecard:"
-puts timecard
-puts ""
-confirm = ask("You are currently punched #{punched_in ? "in" : "out"}. Would you like to punch #{punched_in ? "out" : "in"}? [y/n]: ") { |yn|
-  yn.validate = /[yn]/i
-}
-exit unless confirm.downcase == 'y'
+if not options[:quiet]
+  puts "Current Timecard:"
+  puts timecard
+  puts ""
+end
 
-c.punch
-puts "Punch successfully recorded"
-
-
+if options[:punch]
+  c.punch
+  puts  "You are now #{punched_in ? "in" : "out"}." unless options[:quiet]
+else
+  confirm = ask("You are currently punched #{punched_in ? "in" : "out"}. Would you like to punch #{punched_in ? "out" : "in"}? [y/n]: ") { |yn|
+    yn.validate = /[yn]/i
+  }
+  exit unless confirm.downcase == 'y'
+  c.punch
+  puts "Punch successfully recorded"
+end

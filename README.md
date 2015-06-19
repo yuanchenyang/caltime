@@ -7,7 +7,7 @@ This project is not yet on rubygems, so you will need to clone the repo and buil
 ```
 git clone https://github.com/nherson/caltime && cd caltime
 gem build caltime.gemspec
-gem install ./caltime.gemspec-0.0.1.gem
+gem install ./caltime.gemspec-0.0.2.gem
 ```
 
 When it makes it to rubygems you will be able to install it with a simple `gem install caltime`
@@ -41,5 +41,3 @@ c.punched_out?
 ### Command line tool
 
 Coming soon :)
-
-

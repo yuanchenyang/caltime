@@ -10,19 +10,28 @@ class Caltime
   BASE_URL = "https://caltimeprod.berkeley.edu/"
   SSO_URL = "https://caltimeprod.berkeley.edu/wfc/logonESS_SSO"
 
-  def initialize
+  def initialize(cfilename)
     @agent = Mechanize.new
     @agent.follow_meta_refresh = true
     @authed = false
+    @cfilename = cfilename
   end
 
   def authenticate
     page = @agent.get(BASE_URL)
     loop do
       count = 0
+      if @cfilename.class == String and File.exists?(@cfilename)
+        f = File.open(@cfilename)
+        username = f.gets[0..-2]
+        password = f.gets[0..-2]
+      else
+        username = ask("CalNet Username: ")
+        password = ask("CalNet Password: ") { |q| q.echo = false }
+      end
       page = page.form_with(:id => "loginForm") do |form|
-        form.field_with(:id => 'username').value = ask("CalNet Username: ") 
-        form.field_with(:id => 'password').value = ask("CalNet Password: ") { |q| q.echo = false }
+        form.field_with(:id => 'username').value = username
+        form.field_with(:id => 'password').value = password
       end.submit
       # Did we get redirected back to the login page?
       if page.uri.to_s =~ /auth\.berkeley\.edu/
@@ -54,7 +63,7 @@ class Caltime
   #       For now, if called like CalTime.timecard raw: true, will return 2D array
   def timecard(options={})
     authenticate unless @authed
-    rows = fetch_timecard_rows  
+    rows = fetch_timecard_rows
     table_data = []
     total = 0
     rows.each do |row|

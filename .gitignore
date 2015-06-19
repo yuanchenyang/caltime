@@ -36,3 +36,10 @@ build/
 
 # vim swp files
 *.swp
+
+# Emacs specific
+*~
+\#*\#
+
+# Saved credentials
+credentials.txt
