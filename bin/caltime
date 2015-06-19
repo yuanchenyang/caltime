@@ -24,8 +24,9 @@ if not options[:quiet]
 end
 
 if options[:punch]
+  puts "You are now #{punched_in ? "in" : "out"}." unless options[:quiet]
+  puts "Punching #{punched_in ? "in" : "out"}..."  unless options[:quiet]
   c.punch
-  puts  "You are now #{punched_in ? "in" : "out"}." unless options[:quiet]
 else
   confirm = ask("You are currently punched #{punched_in ? "in" : "out"}. Would you like to punch #{punched_in ? "out" : "in"}? [y/n]: ") { |yn|
     yn.validate = /[yn]/i
