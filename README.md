@@ -12,8 +12,22 @@ gem install ./caltime.gemspec-0.0.2.gem
 
 When it makes it to rubygems you will be able to install it with a simple `gem install caltime`
 
+## Command line tool Usage
+Assuming that `bin/caltime` is in your path,
 
-## Usage
+    $ caltime --h
+    Usage: caltime [options]
+            --credentials FILENAME
+            --punch
+            --quiet
+
+You can provide a credentials file containing the Calnet ID as the first line
+and the password on the second to login. `--punch` will reverse your current
+punch status, disabling interactive mode. `--quiet` disables any superfluous
+output.
+
+## Crontab
+`crontab.example` is an example crontab for scheduling punching in and out.
 
 ### Library
 
@@ -37,7 +51,3 @@ c.punched_in?
 # Returns true if you are currently punched out
 c.punched_out?
 ```
-
-### Command line tool
-
-Coming soon :)
