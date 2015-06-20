@@ -3,4 +3,4 @@
 
 # Registers a punch with the same schedule as before, but within a random 10
 # minute window
-# 55 08,17 * * 1-5 sleep $((RANDOM \% 600)); caltime --credentials ~/credentials.txt --punch
+# 55 08,17 * * 1-5 sleep $((60 * (RANDOM \% 10))); caltime --credentials ~/credentials.txt --punch
